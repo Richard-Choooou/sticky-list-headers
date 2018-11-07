@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container {
+            /* width: 300px;
+            height: 300px; */
+            background: #999;
+        }
+
+        img {
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img src="http://pic.58pic.com/58pic/13/42/86/45f58PICdRF_1024.jpg" alt="">
+    </div>
+    <button id="add">添加</button>
+    <button id="clear">清除所有</button>
+    <button id="getAllAreas">获取所有area对象</button>
+    <button id="getAllAreasInfo">获取所有area对象的位置信息</button>
+    <script src="./drag-area.min.js"></script>
+    <script>
+        
+let dragArea = new DragArea('container')
+
+document.getElementById('add').addEventListener('click', function() {
+    dragArea.addArea({
+        width: 100,
+        height: 60,
+        x: 100,
+        y: 100,
+        left: 20,
+        top: 20,
+        background: '#2aa7ff',
+        opacity: 0.7
+    })
+})
+
+clear.addEventListener('click', function() {
+    dragArea.removeAllArea()
+})
+
+getAllAreas.addEventListener('click', function() {
+    console.log(dragArea.getAllAreas())
+})
+
+getAllAreasInfo.addEventListener('click', function() {
+    // console.log()
+    const areas = dragArea.getAllAreasInfo()
+    areas.forEach(value => {
+        console.log('=========================================')
+        console.log('高度', value.height + 'px')
+        console.log('宽度', value.width + 'px')
+        console.log('距离顶部', value.top + 'px')
+        console.log('距离左边', value.left + 'px')
+        console.log('left 百分比', value.leftProportion)
+        console.log('top 百分比', value.topProportion)
+        console.log('width 百分比', value.widthProportion)
+        console.log('height 百分比', value.heightProportion)
+    })
+
+})
+
+dragArea.on('areaDbClick', function(area) {
+    console.log(area)
+})
+
+
+console.log(dragArea)
+    </script>
+</body>
+</html>

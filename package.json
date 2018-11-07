@@ -1,0 +1,49 @@
+{
+  "name": "drag-area",
+  "version": "0.1.1",
+  "description": "用于拖拽生成区域",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config ./build/webpack.demo.js",
+    "build": "webpack --config ./build/webpack.pro.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Richard-Choooou/drag-area.git"
+  },
+  "keywords": [
+    "drag"
+  ],
+  "author": "richard-chou (zhoupeng1995@live.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Richard-Choooou/drag-area/issues"
+  },
+  "homepage": "https://github.com/Richard-Choooou/drag-area#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.1.2",
+    "@babel/runtime-corejs2": "^7.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-import": "^1.8.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "file-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.9.3",
+    "progress-bar-webpack-plugin": "^1.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9",
+    "webpack-merge": "^4.1.4"
+  }
+}
