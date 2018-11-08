@@ -7,11 +7,11 @@ const ENV = process.argv.NODE_ENV
 module.exports = merge(webpackBaseConfig, {
     mode: 'production',
     output: {
-        filename: 'drag-area.min.js',
+        filename: 'scroll-fixed-header.min.js',
         path: path.resolve(config.basePath, './dist'),
         publicPath: '/dist',
         libraryTarget: 'umd',
-        library: 'DragArea',
+        library: 'ScrollFiexdHeader',
         libraryExport: "default"
     },
 

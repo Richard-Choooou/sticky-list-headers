@@ -1,8 +1,8 @@
 {
-  "name": "drag-area",
+  "name": "scroll-fixed-header",
   "version": "0.1.1",
-  "description": "用于拖拽生成区域",
-  "main": "index.js",
+  "description": "滚动区域固定头部",
+  "main": "./dist/scroll-fixed-header.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./build/webpack.demo.js",
@@ -10,17 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Richard-Choooou/drag-area.git"
+    "url": "git+https://github.com/Richard-Choooou/scroll-fixed-header"
   },
   "keywords": [
-    "drag"
+    "scroll", "header", "fixed"
   ],
   "author": "richard-chou (zhoupeng1995@live.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Richard-Choooou/drag-area/issues"
+    "url": "https://github.com/Richard-Choooou/scroll-fixed-header/issues"
   },
-  "homepage": "https://github.com/Richard-Choooou/drag-area#readme",
+  "homepage": "https://github.com/Richard-Choooou/scroll-fixed-header#readme",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "@babel/runtime-corejs2": "^7.1.2"

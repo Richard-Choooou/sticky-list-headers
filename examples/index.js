@@ -1,6 +1,7 @@
 import ScrollFiexdHeader from '../src'
 
 new ScrollFiexdHeader({
-    container: '#container',
-    headers: ['header1', 'header2', 'header3', 'header4']
+    outerContainer: 'outer-container',
+    innerContainer: 'container',
+    headers: ['header1', 'header2', 'header3', 'header4', 'header5', 'header6']
 })

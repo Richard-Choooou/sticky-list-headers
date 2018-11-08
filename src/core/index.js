@@ -3,40 +3,26 @@ class ScrollFiexdHeader {
         this.options = Object.assign({
 
         }, options)
-
-        this.container = document.querySelector(this.options.container)
+        this.outerContainer = document.getElementById(this.options.outerContainer)
+        this.innerContainer = document.getElementById(this.options.innerContainer)
+        this.setStyle()
         this.initEvent()
-        this.cloneContainer()
         this.headers = new Map()
         this.options.headers.forEach(id => this.headers.set(document.getElementById(id), {}))
-        this.scrollHeight = this.container.scrollHeight
-        console.log(this.scrollHeight)
+        this.scrollHeight = this.innerContainer.scrollHeight
         this.cloneHeader()
-        
-        console.log(this.headers, this.clonedHeaders)
+    }
+
+    setStyle() {
+        this.outerContainer.style.position = 'relative'
+        this.outerContainer.style.transform = 'translate3d(0, 0, 1px)'
+        this.outerContainer.style.overflow = 'hidden'
     }
 
     initEvent() {
-        this.container.style.position = 'relative'
-        this.container.addEventListener('click', () => {
-            alert(1)
-        })
-        this.container.addEventListener('scroll', e => {
-            console.log(11111)
+        this.innerContainer.addEventListener('scroll', e => {
             this.computePostion(e)
         })
-    }
-
-    cloneContainer() {
-        let cloneContainer = this.container.cloneNode(true)
-        const div = document.createElement('div')
-        div.setAttribute('data-info', 'scroll-fiexd-header-container')
-        div.style.position = 'relative'
-        div.appendChild(cloneContainer)
-        this.scrollFiexdHeaderContainer = div
-
-        let parentNode = this.container.parentNode
-        parentNode.replaceChild(div, this.container)
     }
 
     cloneHeader() {
@@ -48,7 +34,8 @@ class ScrollFiexdHeader {
             cloneNode.style.width = node.offsetWidth + 'px'
             cloneNode.style.height = node.offsetHeight + 'px'
             cloneNode.style.position = 'absolute'
-            this.container.appendChild(cloneNode)
+            cloneNode.style.display = 'none'
+            this.outerContainer.appendChild(cloneNode)
             
             this.headers.set(node, cloneNode)
             this.clonedHeaders.set(cloneNode, {
@@ -58,19 +45,27 @@ class ScrollFiexdHeader {
                 top: node.offsetTop,
                 left: node.offsetLeft
             })
-            // return cloneNode
         })
     }
 
     computePostion(e) {
-        console.log(1, this.container.scrollTop)
         this.headers.forEach((cloneNode, protoNode) => {
             let cloneNodeProperty = this.clonedHeaders.get(cloneNode)
+            if (cloneNodeProperty.top < this.innerContainer.scrollTop + cloneNodeProperty.height) {
+                if(this.lastShowHeader) {
+                    let lastShowHeaderProperty = this.clonedHeaders.get(this.lastShowHeader)
+                    this.lastShowHeader.style.top = cloneNodeProperty.top - this.innerContainer.scrollTop - lastShowHeaderProperty.height + 'px'
+                }
+            }
             
-            if (cloneNodeProperty.top < this.container.scrollTop) {
+            if (cloneNodeProperty.top < this.innerContainer.scrollTop) {
                 cloneNode.style.position = 'fixed'
+                cloneNode.style.top = '0'
+                cloneNode.style.display = 'block'
+                this.lastShowHeader = cloneNode
             } else {
                 cloneNode.style.position = 'absolute'
+                cloneNode.style.display = 'none'
             }
         })
     }
