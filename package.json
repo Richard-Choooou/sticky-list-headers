@@ -1,7 +1,7 @@
 {
-  "name": "scroll-fixed-header",
+  "name": "sticky-list-headers",
   "version": "0.1.1",
-  "description": "滚动区域固定头部",
+  "description": "sticky list headers, 滚动列表固定头部",
   "main": "./dist/scroll-fixed-header.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/Richard-Choooou/scroll-fixed-header"
   },
   "keywords": [
-    "scroll", "header", "fixed"
+    "sticky", "scroll", "header", "fixed", "nav", "list"
   ],
   "author": "richard-chou (zhoupeng1995@live.com)",
   "license": "ISC",

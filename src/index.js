@@ -1,3 +1,3 @@
-import ScrollFiexdHeader from './core'
+import StickyListHeaders from './core'
 
-export default ScrollFiexdHeader
+export default StickyListHeaders

@@ -37,7 +37,7 @@
 </head>
 <body>
 <div id="outer-container">
-    <div id="container">
+    <div id="inner-container">
         <h1 id="header1">标题1</h1>
         <p>列表文本</p>
         <p>列表文本</p>
@@ -124,11 +124,11 @@
         <p>列表文本</p>
     </div>
 </div>
-<script src="./scroll-fixed-header.min.js"></script>
+<script src="./sticky-list-headers.min.js"></script>
 <script>
-new ScrollFiexdHeader({
+new StickyListHeaders({
     outerContainer: 'outer-container',
-    innerContainer: 'container',
+    innerContainer: 'inner-container',
     headers: ['header1', 'header2', 'header3', 'header4', 'header5', 'header6']
 })
 </script>

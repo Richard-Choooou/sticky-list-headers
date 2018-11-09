@@ -1,4 +1,4 @@
-class ScrollFiexdHeader {
+class StickyListHeaders {
     constructor(options) {
         this.options = Object.assign({
 
@@ -71,4 +71,4 @@ class ScrollFiexdHeader {
     }
 }
 
-export default ScrollFiexdHeader
+export default StickyListHeaders

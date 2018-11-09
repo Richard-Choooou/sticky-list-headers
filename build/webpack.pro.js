@@ -7,11 +7,11 @@ const ENV = process.argv.NODE_ENV
 module.exports = merge(webpackBaseConfig, {
     mode: 'production',
     output: {
-        filename: 'scroll-fixed-header.min.js',
+        filename: 'sticky-list-headers.min.js',
         path: path.resolve(config.basePath, './dist'),
         publicPath: '/dist',
         libraryTarget: 'umd',
-        library: 'ScrollFiexdHeader',
+        library: 'StickyListHeaders',
         libraryExport: "default"
     },
 
