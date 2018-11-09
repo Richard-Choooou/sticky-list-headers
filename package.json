@@ -2,7 +2,7 @@
   "name": "sticky-list-headers",
   "version": "0.1.1",
   "description": "sticky list headers, 滚动列表固定头部",
-  "main": "./dist/scroll-fixed-header.min.js",
+  "main": "./dist/sticky-list-headers.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./build/webpack.demo.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Richard-Choooou/scroll-fixed-header"
+    "url": "git+https://github.com/Richard-Choooou/sticky-list-headers"
   },
   "keywords": [
     "sticky", "scroll", "header", "fixed", "nav", "list"
@@ -18,9 +18,9 @@
   "author": "richard-chou (zhoupeng1995@live.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Richard-Choooou/scroll-fixed-header/issues"
+    "url": "https://github.com/Richard-Choooou/sticky-list-headers/issues"
   },
-  "homepage": "https://github.com/Richard-Choooou/scroll-fixed-header#readme",
+  "homepage": "https://github.com/Richard-Choooou/sticky-list-headers#readme",
   "dependencies": {
     "@babel/runtime": "^7.1.2",
     "@babel/runtime-corejs2": "^7.1.2"
