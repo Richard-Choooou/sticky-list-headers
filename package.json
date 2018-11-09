@@ -1,6 +1,6 @@
 {
   "name": "sticky-list-headers",
-  "version": "0.1.1",
+  "version": "0.1.13",
   "description": "sticky list headers, 滚动列表固定头部",
   "main": "./dist/sticky-list-headers.min.js",
   "scripts": {

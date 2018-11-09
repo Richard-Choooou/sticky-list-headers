@@ -14,7 +14,8 @@ class StickyListHeaders {
     }
 
     setStyle() {
-        this.outerContainer.style.position = 'relative'
+        let outerContainerPosition = window.getComputedStyle(this.outerContainer).position
+        this.outerContainer.style.position = ['relative', 'absolute', 'fixed'].includes(outerContainerPosition) ? outerContainerPosition : 'relative'
         this.outerContainer.style.transform = 'translate3d(0, 0, 1px)'
         this.outerContainer.style.overflow = 'hidden'
     }
@@ -34,7 +35,7 @@ class StickyListHeaders {
             cloneNode.style.width = node.offsetWidth + 'px'
             cloneNode.style.height = node.offsetHeight + 'px'
             cloneNode.style.position = 'absolute'
-            cloneNode.style.display = 'none'
+            cloneNode.style.visibility = 'hidden'
             this.outerContainer.appendChild(cloneNode)
             
             this.headers.set(node, cloneNode)
@@ -61,11 +62,11 @@ class StickyListHeaders {
             if (cloneNodeProperty.top < this.innerContainer.scrollTop) {
                 cloneNode.style.position = 'fixed'
                 cloneNode.style.top = '0'
-                cloneNode.style.display = 'block'
+                cloneNode.style.visibility = 'visible'
                 this.lastShowHeader = cloneNode
             } else {
                 cloneNode.style.position = 'absolute'
-                cloneNode.style.display = 'none'
+                cloneNode.style.visibility = 'hidden'
             }
         })
     }
