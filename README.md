@@ -8,7 +8,7 @@ sticky list headers when list on scrolling
 
 # 安装 Installation
 
-> npm i sticky-list-headers --save-dev
+> npm i sticky-list-headers --save
 
 
 # 使用 usage
@@ -65,3 +65,7 @@ new StickyListHeaders({
 可以在examples目录查看细节
 
 you can learn more details in examples directory
+
+# 更多 more
+
+**star** or **fork** [click here](https://github.com/Richard-Choooou/sticky-list-headers)
