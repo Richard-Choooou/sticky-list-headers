@@ -1,74 +1,124 @@
 class StickyListHeaders {
     constructor(options) {
-        this.options = Object.assign({
-
-        }, options)
-        this.outerContainer = document.getElementById(this.options.outerContainer)
-        this.innerContainer = document.getElementById(this.options.innerContainer)
-        this.setStyle()
-        this.initEvent()
-        this.headers = new Map()
-        this.options.headers.forEach(id => this.headers.set(document.getElementById(id), {}))
-        this.scrollHeight = this.innerContainer.scrollHeight
-        this.cloneHeader()
+        this.options = Object.assign({}, options)
+        
+        this.outerContainer = this.getDom(this.options.outerContainer)
+        if (!this.outerContainer) {
+            throw new Error(`[sticky-list-headers]: '${this.options.outerContainer}' is not a html element or element id`)
+        }
+        this.innerContainer = this.getDom(this.options.innerContainer)
+        if (!this.innerContainer) {
+            throw new Error(`[sticky-list-headers]: '${this.options.innerContainer}' is not a html element or element id`)
+        }
+        this.setContainerStyle()
+        this.headers = []
+        this.init()
     }
 
-    setStyle() {
+    getDom(dom) {
+        let element = ''
+        if(typeof dom === "string") {
+            element = document.getElementById(dom)
+        } else if(container instanceof HTMLElement) {
+            element = dom
+        }
+
+        return element
+    }
+
+    setContainerStyle() {
         let outerContainerPosition = window.getComputedStyle(this.outerContainer).position
         this.outerContainer.style.position = ['relative', 'absolute', 'fixed'].includes(outerContainerPosition) ? outerContainerPosition : 'relative'
         this.outerContainer.style.transform = 'translate3d(0, 0, 1px)'
         this.outerContainer.style.overflow = 'hidden'
     }
 
-    initEvent() {
-        this.innerContainer.addEventListener('scroll', e => {
-            this.computePostion(e)
+    init() {
+        this.scrollHeight = this.innerContainer.scrollHeight
+        this.lastShowHeader = ''
+        this.innerContainer.addEventListener('scroll', this.computePostion.bind(this))
+        while (this.headers.length > 0) {
+            let cloneNode = this.headers.shift().cloneNode
+            if (this.innerContainer.contains(cloneNode)) {
+                this.innerContainer.removeChild(cloneNode)
+            }
+        }
+        this.options.headers.forEach(id => {
+            let header = this.getDom(id)
+            if (header) {
+                this.headers.push(this.setHeader(header))
+            }
         })
     }
 
-    cloneHeader() {
-        this.clonedHeaders = new Map()
-        this.headers.forEach((value, node) => {
-            const cloneNode = node.cloneNode(true)
-            cloneNode.style.top = node.offsetTop + 'px'
-            cloneNode.style.left = node.offsetLeft + 'px'
-            cloneNode.style.width = node.offsetWidth + 'px'
-            cloneNode.style.height = node.offsetHeight + 'px'
-            cloneNode.style.position = 'absolute'
-            cloneNode.style.visibility = 'hidden'
-            this.outerContainer.appendChild(cloneNode)
-            
-            this.headers.set(node, cloneNode)
-            this.clonedHeaders.set(cloneNode, {
-                prototype: node,
-                height: node.offsetHeight,
-                width: node.offsetWidth,
-                top: node.offsetTop,
-                left: node.offsetLeft
-            })
-        })
+    
+
+    removeEvent() {
+        this.innerContainer.removeEventListener('scroll', this.computePostion)
+    }
+
+    
+    /**
+     * clone header and set headers style
+     * @param {HTMLElement} node 
+     */
+    setHeader(node) {
+        const cloneNode = document.createElement('div')
+        cloneNode.style.width = node.offsetWidth + 'px'
+        cloneNode.style.height = node.offsetHeight + 'px'
+        cloneNode.style.display = 'none'
+        cloneNode.setAttribute('warning', '[sticky-list-headers]: this is a clone node, do not set style')
+        node.style.top = node.offsetTop + 'px'
+        node.style.left = node.offsetLeft + 'px'
+        node.style.width = node.offsetWidth + 'px'
+        node.style.height = node.offsetHeight + 'px'
+
+        this.insertAfter(cloneNode, node)
+        return {
+            protoNode: node,
+            cloneNode: cloneNode,
+            top: node.offsetTop,
+            left: node.offsetLeft,
+            width: node.offsetWidth,
+            height: node.offsetHeight,
+            position: window.getComputedStyle(node).position
+        }
+    }
+
+    insertAfter(newElement, targetElement){
+        var parent = targetElement.parentNode
+        if (parent.lastChild == targetElement) {
+            parent.appendChild(newElement)
+        } else {
+            parent.insertBefore(newElement, targetElement.nextSibling)
+        }
     }
 
     computePostion(e) {
-        this.headers.forEach((cloneNode, protoNode) => {
-            let cloneNodeProperty = this.clonedHeaders.get(cloneNode)
-            if (cloneNodeProperty.top < this.innerContainer.scrollTop + cloneNodeProperty.height) {
+        this.headers.forEach(header => {
+            let {protoNode, ...property} = header
+            if (property.top < this.innerContainer.scrollTop + property.height) {
                 if(this.lastShowHeader) {
-                    let lastShowHeaderProperty = this.clonedHeaders.get(this.lastShowHeader)
-                    this.lastShowHeader.style.top = cloneNodeProperty.top - this.innerContainer.scrollTop - lastShowHeaderProperty.height + 'px'
+                    let lastShowHeaderProperty = this.headers.find(header => this.lastShowHeader === header.protoNode)
+                    this.lastShowHeader.style.top = property.top - this.innerContainer.scrollTop - lastShowHeaderProperty.height + 'px'
                 }
             }
-            
-            if (cloneNodeProperty.top < this.innerContainer.scrollTop) {
-                cloneNode.style.position = 'fixed'
-                cloneNode.style.top = '0'
-                cloneNode.style.visibility = 'visible'
-                this.lastShowHeader = cloneNode
+
+            if (property.top < this.innerContainer.scrollTop) {
+                protoNode.style.position = 'fixed'
+                protoNode.style.top = '0'
+                this.lastShowHeader = protoNode
+                property.cloneNode.style.display = 'block'
             } else {
-                cloneNode.style.position = 'absolute'
-                cloneNode.style.visibility = 'hidden'
+                protoNode.style.position = property.position
+                property.cloneNode.style.display = 'none'
             }
         })
+    }
+
+    refresh() {
+        this.removeEvent()
+        this.init()
     }
 }
 

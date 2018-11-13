@@ -66,6 +66,24 @@ new StickyListHeaders({
 
 you can learn more details in examples directory
 
+# 接口 API
+## refresh
+当滚动容器中的内容发生变动，导致容器高度变化，需要调用此函数重新计算，使吸顶头部适应新的容器高度
+
+execute the function when scroll container document changed for recomputation scroll container height 
+
+示例 example
+```js
+let stickyListHeaders = new StickyListHeaders({
+    outerContainer: 'outer-container',
+    innerContainer: 'inner-container',
+    headers: ['header1', 'header2', 'header3', 'header4', 'header5', 'header6']
+})
+
+// 当dom改变后 when dom changed 
+stickyListHeaders.refresh()
+```
+
 # 更多 more
 
-**star** or **fork** [click here](https://github.com/Richard-Choooou/sticky-list-headers)
+**issue** **star** or **fork** [click here](https://github.com/Richard-Choooou/sticky-list-headers)
