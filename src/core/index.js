@@ -19,7 +19,7 @@ class StickyListHeaders {
         let element = ''
         if(typeof dom === "string") {
             element = document.getElementById(dom)
-        } else if(container instanceof HTMLElement) {
+        } else if(dom instanceof HTMLElement) {
             element = dom
         }
 
@@ -34,13 +34,11 @@ class StickyListHeaders {
     }
 
     init() {
-        this.scrollHeight = this.innerContainer.scrollHeight
         this.lastShowHeader = ''
-        this.innerContainer.addEventListener('scroll', this.computePostion.bind(this))
         while (this.headers.length > 0) {
-            let cloneNode = this.headers.shift().cloneNode
-            if (this.innerContainer.contains(cloneNode)) {
-                this.innerContainer.removeChild(cloneNode)
+            let headerData = this.headers.shift()
+            if (this.innerContainer.contains(headerData.cloneNode)) {
+                this.innerContainer.removeChild(headerData.cloneNode)
             }
         }
         this.options.headers.forEach(id => {
@@ -49,6 +47,10 @@ class StickyListHeaders {
                 this.headers.push(this.setHeader(header))
             }
         })
+        setTimeout(() => {
+            this.scrollHeight = this.innerContainer.scrollHeight
+            this.innerContainer.addEventListener('scroll', this.computePostion.bind(this))
+        }, 0)
     }
 
     
@@ -63,10 +65,11 @@ class StickyListHeaders {
      * @param {HTMLElement} node 
      */
     setHeader(node) {
-        const cloneNode = document.createElement('div')
+        const cloneNode = node.cloneNode()
         cloneNode.style.width = node.offsetWidth + 'px'
         cloneNode.style.height = node.offsetHeight + 'px'
         cloneNode.style.display = 'none'
+        cloneNode.style.position = 'static'
         cloneNode.setAttribute('warning', '[sticky-list-headers]: this is a clone node, do not set style')
         node.style.top = node.offsetTop + 'px'
         node.style.left = node.offsetLeft + 'px'
