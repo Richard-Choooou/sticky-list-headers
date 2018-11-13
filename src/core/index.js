@@ -34,23 +34,22 @@ class StickyListHeaders {
     }
 
     init() {
-        this.lastShowHeader = ''
-        while (this.headers.length > 0) {
-            let headerData = this.headers.shift()
-            if (this.innerContainer.contains(headerData.cloneNode)) {
-                this.innerContainer.removeChild(headerData.cloneNode)
-            }
-        }
+        // this.lastShowHeader = ''
+        // while (this.headers.length > 0) {
+        //     let headerData = this.headers.shift()
+        //     if (this.innerContainer.contains(headerData.cloneNode)) {
+        //         this.innerContainer.removeChild(headerData.cloneNode)
+        //     }
+        // }
         this.options.headers.forEach(id => {
             let header = this.getDom(id)
             if (header) {
                 this.headers.push(this.setHeader(header))
             }
         })
-        setTimeout(() => {
-            this.scrollHeight = this.innerContainer.scrollHeight
-            this.innerContainer.addEventListener('scroll', this.computePostion.bind(this))
-        }, 0)
+        this.scrollHeight = this.innerContainer.scrollHeight
+        this.innerContainer.addEventListener('scroll', this.computePostion.bind(this))
+
     }
 
     
@@ -120,8 +119,23 @@ class StickyListHeaders {
     }
 
     refresh() {
-        this.removeEvent()
-        this.init()
+        // this.removeEvent()
+        this.lastShowHeader = ''
+        this.headers.forEach((header, index) => {
+            if(!this.innerContainer.contains(header.protoNode)) {
+                this.innerContainer.removeChild(header.cloneNode)
+                this.headers.splice(index, 1)
+            }
+        })
+
+        this.headers.map(header => {
+            if(header.protoNode.style.position != 'fixed') {
+                return Object.assign(header, {top: header.protoNode.offsetTop})
+            } else {
+                return Object.assign(header, {top: header.cloneNode.offsetTop})
+            }
+        })
+        this.scrollHeight = this.innerContainer.scrollHeight
     }
 }
 
