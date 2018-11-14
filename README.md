@@ -70,23 +70,29 @@ you can learn more details in [examples directory](https://github.com/Richard-Ch
 
 ## outerContainer
 滚动容器的外层容器,用于占位。
+
 参数：id字符串或者dom元素
 
 The warp scroll container's DOM
+
 params: String Or DOM
 
 ## innerContainer
 滚动容器，通常设置一个固定高度以及overflow属性为auto 或者 scroll
+
 参数：id字符串或者dom元素
 
 The scroll container's DOM, usually set it overflow to 'auto' or 'scroll'
+
 params: String Or DOM
 
 ## headers
 需要固定在顶部头部
+
 参数：包含头部id或者dom元素的列表 Array<String: id> or Array<DOM>
 
 The headers's DOM needs fiexd
+
 params: Array<String: id> or Array<DOM>
 
 # 接口 API
