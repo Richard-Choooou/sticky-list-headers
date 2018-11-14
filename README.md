@@ -62,15 +62,38 @@ new StickyListHeaders({
 </body>
 ```
 
-可以在examples目录查看细节
+可以在[examples目录](https://github.com/Richard-Choooou/sticky-list-headers/tree/master/examples)查看更多细节
 
-you can learn more details in examples directory
+you can learn more details in [examples directory](https://github.com/Richard-Choooou/sticky-list-headers/tree/master/examples)
+
+# 选项 OPTIONS
+
+## outerContainer
+滚动容器的外层容器,用于占位。
+参数：id字符串或者dom元素
+
+The warp scroll container's DOM
+params: String Or DOM
+
+## innerContainer
+滚动容器，通常设置一个固定高度以及overflow属性为auto 或者 scroll
+参数：id字符串或者dom元素
+
+The scroll container's DOM, usually set it overflow to 'auto' or 'scroll'
+params: String Or DOM
+
+## headers
+需要固定在顶部头部
+参数：包含头部id或者dom元素的列表 Array<String: id> or Array<DOM>
+
+The headers's DOM needs fiexd
+params: Array<String: id> or Array<DOM>
 
 # 接口 API
 ## refresh
 当滚动容器中的内容发生变动，导致容器高度变化，需要调用此函数重新计算，使吸顶头部适应新的容器高度
 
-execute the function when scroll container document changed for recomputation scroll container height 
+execute the function when scroll container DOM changed for recomputation scroll container height 
 
 示例 example
 ```js

@@ -34,13 +34,6 @@ class StickyListHeaders {
     }
 
     init() {
-        // this.lastShowHeader = ''
-        // while (this.headers.length > 0) {
-        //     let headerData = this.headers.shift()
-        //     if (this.innerContainer.contains(headerData.cloneNode)) {
-        //         this.innerContainer.removeChild(headerData.cloneNode)
-        //     }
-        // }
         this.options.headers.forEach(id => {
             let header = this.getDom(id)
             if (header) {
@@ -119,7 +112,6 @@ class StickyListHeaders {
     }
 
     refresh() {
-        // this.removeEvent()
         this.lastShowHeader = ''
         this.headers.forEach((header, index) => {
             if(!this.innerContainer.contains(header.protoNode)) {
