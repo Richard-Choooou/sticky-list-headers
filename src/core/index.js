@@ -1,6 +1,8 @@
 class StickyListHeaders {
     constructor(options) {
-        this.options = Object.assign({}, options)
+        this.options = Object.assign({
+            useTranslateZ: true
+        }, options)
         
         this.outerContainer = this.getDom(this.options.outerContainer)
         if (!this.outerContainer) {
@@ -29,7 +31,9 @@ class StickyListHeaders {
     setContainerStyle() {
         let outerContainerPosition = window.getComputedStyle(this.outerContainer).position
         this.outerContainer.style.position = ['relative', 'absolute', 'fixed'].includes(outerContainerPosition) ? outerContainerPosition : 'relative'
-        this.outerContainer.style.transform = 'translate3d(0, 0, 1px)'
+        if(this.options.useTranslateZ) {
+            this.outerContainer.style.transform = 'translate3d(0, 0, 1px)'
+        }
         this.outerContainer.style.overflow = 'hidden'
     }
 
@@ -100,7 +104,11 @@ class StickyListHeaders {
             }
 
             if (property.top < this.innerContainer.scrollTop) {
-                protoNode.style.position = 'fixed'
+                if(this.options.useTranslateZ) {
+                    protoNode.style.position = 'fixed'
+                } else {
+                    protoNode.style.position = 'absolute'
+                }
                 protoNode.style.top = '0'
                 this.lastShowHeader = protoNode
                 property.cloneNode.style.display = 'block'

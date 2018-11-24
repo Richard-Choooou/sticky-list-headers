@@ -1,11 +1,11 @@
 {
   "name": "sticky-list-headers",
-  "version": "0.1.2",
+  "version": "0.2.1",
   "description": "sticky list headers, 滚动列表固定头部",
   "main": "./dist/sticky-list-headers.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --config ./build/webpack.demo.js",
+    "dev": "webpack-dev-server --config ./build/webpack.demo.js --host 0.0.0.0",
     "build": "webpack --config ./build/webpack.pro.js"
   },
   "repository": {
